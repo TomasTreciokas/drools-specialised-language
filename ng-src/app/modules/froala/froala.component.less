@@ -1,0 +1,22 @@
+:host {
+	display: block;
+
+	::ng-deep {
+		.fr-box.fr-basic.fr-top {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+
+			.fr-wrapper {
+				flex: 1 1 auto;
+				overflow: auto;
+			}
+
+			.fr-element {
+				overflow: hidden;
+				min-height: initial !important;
+				max-height: initial !important;
+			}
+		}
+	}
+}

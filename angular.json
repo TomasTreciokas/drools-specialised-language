@@ -1,0 +1,142 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "analytics": "f74ad077-9b9f-4723-a6be-9f384ec25aac",
+    "packageManager": "yarn"
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "trfac-web": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "",
+      "sourceRoot": "ng-src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "customWebpackConfig": {
+              "path": "./webpack.ng.config.ts"
+            },
+            "optimization": {
+              "scripts": false,
+              "styles": true,
+              "fonts": true
+            },
+            "outputPath": "dist/trfacweb",
+            "index": "index.html",
+            "main": "ng-src/main.ts",
+            "polyfills": "ng-src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "ng-src/favicon.ico",
+              "ng-src/assets",
+              {
+                "input": "./scripts",
+                "glob": "**/*",
+                "output": "/scripts"
+              },
+              {
+                "input": "./views",
+                "glob": "**/*",
+                "output": "/views"
+              }, 
+              {
+                "input": "./blocks",
+                "glob": "**/*",
+                "output": "/blocks"
+              },
+              {
+                "input": "./generators",
+                "glob": "**/*",
+                "output": "/generators"
+              }
+            ],
+            "styles": [
+              "ng-src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "ng-src/environments/environment.ts",
+                  "with": "ng-src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "trfac-web:build:production"
+            },
+            "development": {
+              "browserTarget": "trfac-web:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "trfac-web:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "ng-src/test.ts",
+            "polyfills": "ng-src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "ng-src/favicon.ico",
+              "ng-src/assets"
+            ],
+            "styles": [
+              "ng-src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "trfacweb"
+}

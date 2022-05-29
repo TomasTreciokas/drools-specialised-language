@@ -1,0 +1,17 @@
+<emoji-mart
+	[style]="{ height: '250px', width: '300px' }"
+	*ngIf="isOpened"
+	[showPreview]="false"
+	[set]="emojiSet"
+	[backgroundImageFn]="emojiService.backgroundFn"
+	[darkMode]="false"
+	(emojiSelect)="addEmoji($event.emoji.native)"
+></emoji-mart>
+<button
+	matTooltip="Emojis"
+	mat-icon-button
+	class="tw-flex tw-items-center tw-justify-center"
+	(click)="isOpened = !isOpened"
+>
+	<mat-icon class="tw-block">insert_emoticon</mat-icon>
+</button>

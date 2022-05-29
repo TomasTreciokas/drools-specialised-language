@@ -1,0 +1,43 @@
+.emoji-img {
+	padding: 0.67em;
+	width: 0px;
+	height: 0px;
+}
+
+:host {
+	display: flex;
+	// min-height: 32px;
+	flex: 1 1 auto;
+	align-items: center;
+
+	::ng-deep {
+		// .fr-wrapper {
+		//   flex: 1 1 auto;
+		// }
+
+		.emoji-img {
+			padding: 0.67em;
+			width: 0px;
+			height: 0px;
+			margin: 0 0.12em;
+			vertical-align: middle;
+		}
+	}
+
+	.froala-input-el {
+		flex: 1 1 auto;
+	}
+}
+
+.popup {
+	::ng-deep {
+		&,
+		*,
+		::before,
+		::after {
+			border-width: 0;
+			border-style: solid;
+			// border-color: theme('borderColor.DEFAULT', currentColor);
+		}
+	}
+}

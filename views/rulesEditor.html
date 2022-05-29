@@ -1,0 +1,48 @@
+<div>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2>Rules Editor: {{droolsLanguage}}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="alert alert-danger" ng-show="data.error.code">
+                {{data.error.message}}
+            </div>
+            <div class="panel panel-default" ng-hide="data.error.code || data.result">
+                <div class="panel-heading">
+                    <h3>Rules Editor</h3>
+                </div>
+                <div id="blocklyDiv" style="height: 1500px; width: 1500px;">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="blocklyButtons" style="height: 480px; width: 1200px;">
+    <button id="generateCode" onclick="generateCode()"> Generate code </button>
+    <button id="generateCodeButton"> Generate code </button>
+    <button id="saveWorkspaceButton" onclick="save()"> Save workspace </button>
+    <button id="loadWorkspaceButton"> Load workspace </button>
+</div>
+<!-- Blockly toolbox structure -->
+
+<xml id="toolbox" style="display: none">
+  <category name="Drools" colout=100>
+    <block type="drools_rule"></block>
+    <block type="drools_property"></block>
+    <block type="drools_object"></block>
+    <block type="drools_constraint"></block>
+    <block type="drools_string"></block>
+    <block type="drools_number"></block>
+    <block type="drools_drl"></block>
+    <block type="controls_if"></block>
+    <block type="controls_repeat_ext"></block>
+    <block type="logic_compare"></block>
+    <block type="math_number"></block>
+    <block type="math_arithmetic"></block>
+    <block type="text"></block>
+    <block type="text_print"></block>
+  </category>
+</xml>

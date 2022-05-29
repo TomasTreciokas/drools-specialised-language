@@ -1,0 +1,27 @@
+:host {
+	position: relative;
+	z-index: 2;
+	display: block;
+
+	emoji-mart {
+		position: absolute;
+		right: 0;
+		bottom: 50px;
+		width: 300px;
+		height: 250px;
+	}
+
+	button {
+		position: relative;
+	}
+
+	::ng-deep.emoji-mart-scroll {
+		height: calc(~'100% - 84px');
+	}
+
+	::ng-deep.emoji-mart-anchor {
+		::ng-deep path {
+			fill: #858585;
+		}
+	}
+}

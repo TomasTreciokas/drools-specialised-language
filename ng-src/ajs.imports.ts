@@ -1,0 +1,9 @@
+import '../app.js';
+import '../config.js';
+import '../persistence.js';
+import '../controllers/goldCardOfferTask.js';
+import '../controllers/humanTasks.js';
+import '../controllers/main.js';
+import '../controllers/processInstances.js';
+import '../controllers/rejectTask.js';
+import '../controllers/rulesEditor.js';

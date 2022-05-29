@@ -1,0 +1,29 @@
+export interface User {
+	userId: string;
+	name: string[];
+	email: string;
+	contactNumber?: string;
+	selvesDescription: string;
+	country?: any;
+	cellNumber?: string;
+	mood: string;
+	isConfirmed: boolean;
+	nameInitials: string;
+	profilePicture: string;
+	reportsTo: string;
+	managementDescription: string;
+	jobTitle: string;
+	userType: number;
+	userNameComplete: string;
+	address?: any;
+	businessId: string;
+	locationId: string;
+	connectionID: string;
+	onlineStatus: boolean;
+	associateId: string;
+	blink: boolean;
+	alreadyGetHistory: boolean;
+	messageLimitReached: boolean;
+	chatMessageList: any[];
+	alreadyShared: boolean;
+}

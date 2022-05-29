@@ -1,0 +1,90 @@
+<ng-container
+	*mentions="froala; let users = users; openSubj: mentionsOpen$; users: users"
+>
+	<div
+		*cdkConnectedOverlay="
+			let temp;
+			open: true;
+			positions: overlayPos;
+			offsetY: -20;
+			offsetX: -10;
+			width: (dimensions.width$ | async | defaultIfNull: 150) + 30;
+			disableClose: true;
+			origin: chatInputOverlayOrigin
+		"
+		class="tw-flex tw-flex-col tw-w-full tw-overflow-auto tw-bg-white tw-border tw-border-gray-300 tw-divide-y tw-divide-gray-300 tw-rounded-md popup tw-max-h-32 custom-scrollbar"
+	>
+		<div
+			class="tw-flex tw-items-center tw-px-4 tw-py-2 tw-space-x-2 tw-transition-colors tw-cursor-pointer"
+			*ngFor="let user of users"
+			[class.tw-bg-gray-200]="user.selected"
+			[mentionItem]="user"
+			[selected]="user.selected"
+		>
+			<img [src]="user.profilePicture" class="tw-w-6 tw-h-6 tw-rounded-full" />
+			<span>{{ user.userNameComplete }}</span>
+		</div>
+	</div>
+</ng-container>
+<ng-template
+	[froalaEmoji]="froala"
+	let-emojis="emojis"
+	[froalaEmojiOpenSubj]="mentionsOpen$"
+	#froalaEmojis="froalaEmojiDir"
+>
+	<div
+		*cdkConnectedOverlay="
+			let temp;
+			open: true;
+			positions: overlayPos;
+			offsetY: -20;
+			offsetX: -10;
+			width: (dimensions.width$ | async | defaultIfNull: 150) + 30;
+			disableClose: true;
+			origin: chatInputOverlayOrigin
+		"
+		class="tw-flex tw-flex-col tw-w-full tw-overflow-auto tw-bg-white tw-border tw-border-gray-300 tw-divide-y tw-divide-gray-300 tw-rounded-md popup tw-max-h-32 custom-scrollbar"
+	>
+		<div
+			class="tw-flex tw-items-center tw-px-4 tw-py-2 tw-space-x-2 tw-transition-colors tw-cursor-pointer"
+			*ngFor="let emoji of emojis"
+			[class.tw-bg-gray-200]="emoji.selected"
+			[froalaEmojiItem]="emoji"
+			[selected]="emoji.selected"
+		>
+			<img class="emoji-img" *ngIf="emoji.native as n" [emoji]="emoji.native" />
+			<span class="tw-text-sm tw-font-semibold">:{{ emoji.shortName }}:</span>
+		</div>
+	</div>
+</ng-template>
+<div
+	cdkOverlayOrigin
+	#chatInputOverlayOrigin="cdkOverlayOrigin"
+	#dimensions="liveDims"
+	liveDims
+	class="froala-input-el"
+	froalaInline
+	#froala="froala"
+	[froalaOptions]="{
+		quickInsertEnabled: false,
+		multiLine: false,
+		alternateNewline: true,
+		toolbarButtons: buttons,
+		toolbarButtonsMD: buttons,
+		toolbarButtonsSM: buttons,
+		toolbarButtonsXS: buttons,
+		charCounterCount: false,
+		pluginsEnabled: froalaPlugins
+	}"
+	froalaTrimWhitespace
+	(froalaKeydown)="keyPress$.next($event.originalEvent)"
+	[ngModelOptions]="{ standalone: true }"
+	[ngModel]="contentChanged | async"
+	(ngModelChange)="contentChanged.next($event)"
+></div>
+<emoji-picker
+	[froalaDir]="froala"
+	[froalaEmojiDir]="froalaEmojis"
+	class="chat-action purple-icon"
+	#emojiPicker
+></emoji-picker>
